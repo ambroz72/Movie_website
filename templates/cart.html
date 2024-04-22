@@ -1,0 +1,113 @@
+{% extends 'ubase.html' %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+</head>
+<body>
+    <h1>Your Cart</h1>
+    {% if cart_movies %}
+        <ul>
+            {% for movie in cart_movies %}
+                <li>
+                    <h2>{{ movie.m_title }}</h2>
+                    <p>{{ movie.m_desc }}</p>
+                    <!-- Display other movie details as needed -->
+                    {% if movie.m_img %}
+                        <img src="{{ movie.m_img.url }}"  height="300px" width="300px" alt="{{ movie.m_title }}">
+                    {% endif %}
+                    <form action="{% url 'delete_movie' movie.id %}" method="POST"><br>
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary">Remove from Cart</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Your cart is empty.</p>
+    {% endif %}
+</body>
+</html>
+
+
+
+
+{% comment %} <h1><center>Movie History </center></h1>
+<div class="container">
+    {% if cart1.e_cart.film is null %}
+    <h2>Sorry...</h2><br>
+        <label>You have no items in the cart. </label>
+        <form action="">
+        <button class="btn btn-primary">Check out</button>
+    </form>
+    {% else %}
+    <fieldset><br><br>
+        <div class="card-group " >
+        <div class="card border-0" >
+            <label>{{cart1.e_cart.film.m_title}}</label><br>
+            <label>{{cart1.e_cart.film.m_desc}}</label>
+            <label>{{cart1.e_cart.film.m_DOB}}</label> 
+
+            <label>{{cart1.e_cart.film.m_youtube}}</label>
+            <label class="btn "><caption>Mr</caption>{{cart1.e_cart.film.m_act}} </label><br><br>
+        <a href="">Check out</a>
+        <a href="" class="btn btn-success">Pay</a>
+        </div>
+        <div class="card border-0">
+            <img src="{{cart1.e_cart.film.m_img.url}}" alt="film image" height="280px" width="280px">
+        </div>
+        </div>
+    </fieldset> 
+{% endif %}
+</div>
+</div> {% endcomment %}
+{% endblock %}
+
+
+
+{% comment %} {% extends 'ubase.html' %}
+{% block content %}
+<div class="container">
+    <h1 class="text-center mt-5 mb-4">Movie History</h1>
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            {% if cart1.e_cart.films %}
+                <fieldset>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ cart1.e_cart.films.m_title }}</h5>
+                            <p class="card-text">{{ cart1.e_cart.films.m_desc }}</p>
+                            <p class="card-text"><strong>Release Date:</strong> {{ cart1.e_cart.film.m_DOB }}</p>
+                            <p class="card-text"><strong>Actor:</strong> {{ cart1.e_cart.film.m_act }}</p>
+                            <p class="card-text"><strong>Youtube Link:</strong> <a href="{{ cart1.e_cart.film.m_youtube }}">{{ cart1.e_cart.film.m_youtube }}</a></p>
+                            <a href="#" class="btn btn-primary">Check out</a>
+                            <a href="#" class="btn btn-success">Pay</a>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="card">
+                    <img src="{{ cart1.e_cart.film.m_img.url }}" class="card-img-top" alt="film Image">
+                </div>
+            {% else %}
+                <div class="text-center">
+                    <h2>Sorry...</h2>
+                    <p>You have no items in the cart.</p>
+                    <form action="">
+                        <button class="btn btn-primary">Check out</button>
+                    </form>
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+{% endblock %} {% endcomment %}
+
+
+
+
+
